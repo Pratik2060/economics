@@ -1,9 +1,12 @@
-import express from 'express';
-const router = express.Router();
+import { Router } from "express";
+import auth from "../middleware/auth.js";
+import { AddSubCategoryController, deleteSubCategoryController, getSubCategoryController, updateSubCategoryController } from "../controllers/subCategory.controller.js";
 
-// Sample route
-router.get('/', (req, res) => {
-  res.send('SubCategory route is working!');
-});
+const subCategoryRouter = Router()
 
-export default router;
+subCategoryRouter.post('/create',auth,AddSubCategoryController)
+subCategoryRouter.post('/get',getSubCategoryController)
+subCategoryRouter.put('/update',auth,updateSubCategoryController)
+subCategoryRouter.delete('/delete',auth,deleteSubCategoryController)
+
+export default subCategoryRouter

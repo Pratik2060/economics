@@ -1,9 +1,12 @@
-import express from 'express';
-const router = express.Router();
+import { Router } from 'express'
+import auth from '../middleware/auth.js'
+import { addAddressController, deleteAddresscontroller, getAddressController, updateAddressController } from '../controllers/address.controller.js'
 
-// Sample route
-router.get('/', (req, res) => {
-  res.send('Address route is working!');
-});
+const addressRouter = Router()
 
-export default router;
+addressRouter.post('/create',auth,addAddressController)
+addressRouter.get("/get",auth,getAddressController)
+addressRouter.put('/update',auth,updateAddressController)
+addressRouter.delete("/disable",auth,deleteAddresscontroller)
+
+export default addressRouter

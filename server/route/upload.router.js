@@ -1,10 +1,10 @@
-import express from 'express';
+import { Router } from 'express'
+import auth from '../middleware/auth.js'
+import uploadImageController from '../controllers/uploadImage.controller.js'
+import upload from '../middleware/multer.js'
 
-const router = express.Router();
+const uploadRouter = Router()
 
-// Example route: GET /api/file/test
-router.get('/test', (req, res) => {
-    res.json({ message: 'Upload route is working!' });
-});
+uploadRouter.post("/upload",auth,upload.single("image"),uploadImageController)
 
-export default router;
+export default uploadRouter

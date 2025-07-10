@@ -1,10 +1,12 @@
-import express from 'express';
+import { Router } from 'express'
+import auth from '../middleware/auth.js'
+import { AddCategoryController, deleteCategoryController, getCategoryController, updateCategoryController } from '../controllers/category.controller.js'
 
-const router = express.Router();
+const categoryRouter = Router()
 
-// Example route: GET /api/category/test
-router.get('/test', (req, res) => {
-    res.json({ message: 'Category route is working!' });
-});
+categoryRouter.post("/add-category",auth,AddCategoryController)
+categoryRouter.get('/get',getCategoryController)
+categoryRouter.put('/update',auth,updateCategoryController)
+categoryRouter.delete("/delete",auth,deleteCategoryController)
 
-export default router;
+export default categoryRouter
